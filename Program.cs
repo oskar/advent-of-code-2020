@@ -31,10 +31,10 @@ namespace advent_of_code_2020
             day.Run(input);
         }
 
-        private static string GetInput(int dayNumber)
+        private static string[] GetInput(int dayNumber)
         {
             var fileName = $"Day{dayNumber}.input";
-            return File.Exists(fileName) ? fileName : null;
+            return File.Exists(fileName) ? File.ReadAllLines(fileName) : null;
         }
 
         private static IDay GetDay(int dayNumber)

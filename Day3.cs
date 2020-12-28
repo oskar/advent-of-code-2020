@@ -1,14 +1,11 @@
 ﻿using System;
-using System.IO;
 
 namespace advent_of_code_2020
 {
     public class Day3 : IDay
     {
-        public void Run(string inputFile)
+        public void Run(string[] input)
         {
-            var lines = File.ReadAllLines(inputFile);
-
             Console.WriteLine("Part 1");
             Traverse(3, 1);
 
@@ -28,12 +25,12 @@ namespace advent_of_code_2020
                 var row = 0;
                 var trees = 0;
 
-                while (row < lines.Length - 1)
+                while (row < input.Length - 1)
                 {
                     column += right;
                     row += down;
 
-                    var line = lines[row];
+                    var line = input[row];
                     if (line[column % line.Length] == '#')
                     {
                         trees++;

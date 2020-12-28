@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 
 namespace advent_of_code_2020
 {
     public class Day1 : IDay
     {
-        public void Run(string inputFile)
+        public void Run(string[] input)
         {
-            var numbers = File.ReadAllLines(inputFile).Select(l => Convert.ToInt32(l)).ToList();
+            var numbers = input.Select(l => Convert.ToInt32(l)).ToList();
             Part1(numbers);
             Part2(numbers);
         }
