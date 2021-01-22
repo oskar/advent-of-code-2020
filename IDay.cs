@@ -2,6 +2,7 @@
 {
     public interface IDay
     {
-        void Run(string[] input);
+        long PartOne(string[] input);
+        long PartTwo(string[] input);
     }
 }

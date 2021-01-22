@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace advent_of_code_2020
@@ -8,20 +7,11 @@ namespace advent_of_code_2020
     {
         private readonly Regex _linePattern = new(@"^(\d*)-(\d*) (\w): (\w*)$");
 
-        public void Run(string[] input)
-        {
-            Console.WriteLine($"Found {input.Length} lines in {input}");
+        public long PartOne(string[] input)
+            => input.Select(Parse).Count(l => IsValidPart1(l.First, l.Second, l.Character, l.Password));
 
-            var parsedLines = input.Select(Parse).ToList();
-
-            Console.WriteLine("Part 1");
-            var count = parsedLines.Count(l => IsValidPart1(l.First, l.Second, l.Character, l.Password));
-            Console.WriteLine($"Valid passwords: {count}");
-
-            Console.WriteLine("Part 2");
-            count = parsedLines.Count(l => IsValidPart2(l.First, l.Second, l.Character, l.Password));
-            Console.WriteLine($"Valid passwords: {count}");
-        }
+        public long PartTwo(string[] input)
+            => input.Select(Parse).Count(l => IsValidPart2(l.First, l.Second, l.Character, l.Password));
 
         private (int First, int Second, char Character, string Password) Parse(string line)
         {

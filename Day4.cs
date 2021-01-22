@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -7,18 +6,9 @@ namespace advent_of_code_2020
 {
     public class Day4 : IDay
     {
-        public void Run(string[] input)
+        public long PartOne(string[] input)
         {
-            Console.WriteLine("Part 1");
-            Part1(input);
-
-            Console.WriteLine("Part 2");
-            Part2(input);
-        }
-
-        private static void Part1(IEnumerable<string> input)
-        {
-            var validPassports = GetPassportLines(input)
+            return GetPassportLines(input)
                 .Select(l => Regex.Matches(l, @"(\w{3}):\S*")
                     .Select(m => m.Groups[1].Value)
                     .ToHashSet())
@@ -29,13 +19,11 @@ namespace advent_of_code_2020
                               set.Contains("hcl") &&
                               set.Contains("ecl") &&
                               set.Contains("pid"));
-
-            Console.WriteLine($"Valid passports: {validPassports}");
         }
 
-        private static void Part2(IEnumerable<string> input)
+        public long PartTwo(string[] input)
         {
-            var validPassports = GetPassportLines(input)
+            return GetPassportLines(input)
                 .Select(l => Regex.Matches(l, @"(\w{3}):(\S*)")
                     .ToDictionary(m => m.Groups[1].Value, m => m.Groups[2].Value))
                 .Where(p => p.TryGetValue("byr", out var birthYear) && BirthYearIsValid(birthYear))
@@ -44,9 +32,7 @@ namespace advent_of_code_2020
                 .Where(p => p.TryGetValue("hgt", out var height) && HeightIsValid(height))
                 .Where(p => p.TryGetValue("hcl", out var hairColor) && HairColorIsValid(hairColor))
                 .Where(p => p.TryGetValue("ecl", out var eyeColor) && EyeColorIsValid(eyeColor))
-                .Where(p => p.TryGetValue("pid", out var passportId) && PassportIsIsValid(passportId));
-
-            Console.WriteLine($"Valid passports: {validPassports.Count()}");
+                .Count(p => p.TryGetValue("pid", out var passportId) && PassportIsIsValid(passportId));
         }
 
         private static bool BirthYearIsValid(string input) => int.Parse(input) is >= 1920 and <= 2002;

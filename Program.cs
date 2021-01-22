@@ -27,8 +27,8 @@ namespace advent_of_code_2020
                 Console.WriteLine($"Input for day {dayNumber} not found");
             }
 
-            Console.WriteLine($"Running day {dayNumber}");
-            day.Run(input);
+            Console.WriteLine($"Day {dayNumber} part 1: {day.PartOne(input)}");
+            Console.WriteLine($"Day {dayNumber} part 2: {day.PartTwo(input)}");
         }
 
         private static string[] GetInput(int dayNumber)
